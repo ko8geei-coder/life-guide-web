@@ -1,0 +1,20 @@
+{
+  "name": "高性价比人生指南",
+  "short_name": "人生指南",
+  "description": "669 条生活建议的随身手册",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f2f4f2",
+  "theme_color": "#12211c",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
