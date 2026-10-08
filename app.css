@@ -293,25 +293,19 @@ mark { background: #fff3c4; color: inherit; padding: 0 1px; border-radius: 2px; 
   .grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* 桌面：左侧固定导航栏 + 内容区自适应（真正的双栏布局） */
+/* 桌面：内容加宽居中，导航保持在底部（与手机一致，底栏同内容列宽） */
 @media (min-width: 980px) {
-  :root { --side: 236px; }
-
-  /* 取消平板居中的手机框，回到全宽 */
+  /* 取消平板居中的手机框，回到全宽灰底 + 居中内容列 */
   body {
-    max-width: none; margin: 0; padding-bottom: 40px;
+    max-width: none; margin: 0;
     box-shadow: none; background: #eef1ef; font-size: 17px; line-height: 1.7;
   }
 
-  /* 内容列统一宽度：顶栏与内容区用同一公式，左缘对齐、整体居中 */
+  /* 顶栏：白底吸顶，与内容列同宽居中 */
   .topbar {
-    position: sticky; top: 0; z-index: 30;
-    margin-left: max(var(--side), calc((100vw - 980px) / 2));
-    margin-right: auto;
-    max-width: 880px;
+    max-width: 880px; margin: 0 auto;
     background: #fff; color: var(--ink);
     border-bottom: 1px solid var(--line);
-    box-shadow: 0 1px 0 rgba(0,0,0,.02);
   }
   .topbar .tb-title { color: var(--ink); }
   .topbar .tb-back { color: var(--ink); }
@@ -319,40 +313,16 @@ mark { background: #fff3c4; color: inherit; padding: 0 1px; border-radius: 2px; 
   .topbar .tb-act { background: var(--green); color: #fff; }
   .topbar .tb-act:active { background: #0a6a4d; }
 
-  /* 底部导航 → 左侧固定深色侧栏 */
+  /* 底部导航：保持在底部，与内容列同宽居中，浮起带圆角 */
   .tabbar {
-    flex-direction: column; align-items: stretch; justify-content: flex-start;
-    height: 100vh; width: var(--side); left: 0; right: auto;
-    bottom: 0; top: 0; padding: 26px 0 0; transform: none; gap: 4px;
-    background: var(--ink); border-top: none; border-right: 1px solid rgba(255,255,255,.08);
+    max-width: 880px; left: 50%; transform: translateX(-50%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.07);
   }
-  .tabbar a {
-    flex: none;  /* 关键：重置手机端 flex:1（平分底栏），否则竖排时每个菜单项平分整屏高度 */
-    flex-direction: row; justify-content: flex-start; gap: 14px;
-    height: 48px; font-size: 15px; color: #b9c7c1; border-radius: 0;
-  }
-  .tabbar a.on { color: #fff; background: rgba(255,255,255,.08); box-shadow: inset 3px 0 0 var(--green-3); }
-  .tabbar .ti { font-size: 20px; }
 
-  /* 侧栏品牌区（仅桌面显示） */
-  .sb-brand {
-    display: flex; align-items: center; gap: 12px;
-    padding: 0 22px 22px; margin-bottom: 10px;
-    border-bottom: 1px solid rgba(255,255,255,.08); cursor: pointer;
-  }
-  .sb-logo {
-    width: 42px; height: 42px; flex: none; border-radius: 11px;
-    background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px;
-  }
-  .sb-txt { display: flex; flex-direction: column; line-height: 1.25; }
-  .sb-name { color: #fff; font-size: 17px; font-weight: 700; }
-  .sb-sub { color: #7e8f88; font-size: 12px; margin-top: 2px; }
-
-  /* 内容区：与顶栏同宽同位，阅读密度合适、不空旷 */
+  /* 内容区：880px 居中，阅读密度合适、不空旷 */
   .wrap {
-    margin-left: max(var(--side), calc((100vw - 980px) / 2));
-    margin-right: auto;
-    max-width: 880px;
+    max-width: 880px; margin: 0 auto;
     padding: 28px 32px 44px;
   }
 
