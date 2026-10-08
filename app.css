@@ -115,6 +115,15 @@ input { font-family: inherit; }
 }
 .searchbar button:active { background: #0a6a4d; }
 
+/* ---------- 热门搜索 ---------- */
+.hotrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -4px 0 16px; }
+.hot-label { font-size: 12px; color: var(--hint); margin-right: 2px; }
+.hotword {
+  font-size: 12.5px; padding: 5px 12px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--line); color: var(--sub);
+}
+.hotword:active { background: #e8f5ef; color: var(--green); border-color: #cfe7db; }
+
 /* ---------- 分组卡（6 主题 / 8 场景） ---------- */
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .g-card {
@@ -334,8 +343,9 @@ mark { background: #fff3c4; color: inherit; padding: 0 1px; border-radius: 2px; 
   .hero-stats { justify-content: flex-start; gap: 64px; }
   .hero-stats div { flex: none; text-align: left; }
 
-  /* 搜索框收窄，不再横跨整行 */
+  /* 搜索框收窄，不再横跨整行；热词行与搜索框对齐 */
   .searchbar { max-width: 520px; }
+  .hotrow { max-width: 520px; }
 
   /* 详情页：正文收窄为舒适阅读栏 */
   .detail { max-width: 720px; margin-left: auto; margin-right: auto; }

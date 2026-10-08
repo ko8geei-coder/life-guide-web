@@ -15,6 +15,9 @@
   // 标签字典（与 build-web.js 的 tagsKeys 顺序一致：钱/时间/毅力/收益/口径）
   var TAG_KEYS = ['钱', '时间', '毅力', '收益', '口径'];
 
+  // 首页热门搜索词（已验证在数据里有命中；点击直达搜索结果）
+  var HOT_WORDS = ['睡眠', '医保', '社保', '租房', '体检', '感冒', '离职', '运动'];
+
   // ---------- 全局状态 ----------
   var IDX = null;             // index.json
   var chapterCache = {};     // slug -> 分章详情
@@ -173,6 +176,12 @@
     // 搜索
     h += '<div class="searchbar"><input id="q" placeholder="搜建议、场景、关键词…" ' +
       'enterkeyhint="search" autocomplete="off"><button onclick="goSearch()">搜索</button></div>';
+
+    // 热门搜索（点词直达结果）
+    h += '<div class="hotrow"><span class="hot-label">大家都在搜</span>' +
+      HOT_WORDS.map(function (w) {
+        return '<button class="hotword" onclick="location.href=\'#/s/' + encodeURIComponent(w) + '\'">' + w + '</button>';
+      }).join('') + '</div>';
 
     // 今日一条
     h += '<div class="card tap" onclick="location.href=\'#/d/' + td.id + '\'">' +
