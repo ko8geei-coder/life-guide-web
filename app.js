@@ -111,7 +111,12 @@
     { href: '#/mine', icon: '☺', text: '我的' }
   ];
   function tabbar(cur) {
-    var h = '<nav class="tabbar">';
+    // 桌面端侧栏左上角的品牌区（手机端 display:none，不显示）
+    var brand = '<div class="sb-brand" role="link" onclick="location.hash=\'#/\'">' +
+      '<span class="sb-logo">🤝</span>' +
+      '<span class="sb-txt"><span class="sb-name">人生指南</span>' +
+      '<span class="sb-sub">高性价比生活手册</span></span></div>';
+    var h = '<nav class="tabbar">' + brand;
     TABS.forEach(function (t) {
       var cls = (t.href === cur || (cur === '/ch' || cur === '/detail' || cur === '/search') && t.href === '#/') ? ' on' : '';
       h += '<a href="' + t.href + '" class="' + cls.trim() + '"><span class="ti">' + t.icon + '</span>' + t.text + '</a>';

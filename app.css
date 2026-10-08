@@ -280,11 +280,90 @@ mark { background: #fff3c4; color: inherit; padding: 0 1px; border-radius: 2px; 
 }
 .foot a { color: var(--green); text-decoration: none; }
 
-/* ---------- 宽屏优化：手机优先，桌面居中 ---------- */
-@media (min-width: 720px) {
-  body { max-width: 640px; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,.06); }
-  .tabbar { max-width: 640px; left: 50%; transform: translateX(-50%); }
-  .grid { grid-template-columns: 1fr 1fr; }
+/* 侧栏品牌区在手机/平板端隐藏，桌面端由媒体查询开启 */
+.sb-brand { display: none; }
+
+/* ====================== 响应式：平板 / 桌面 ====================== */
+
+/* 平板及以上：内容加宽居中、网格变 3 列（仍是手机式单栏 + 底部导航） */
+@media (min-width: 768px) {
+  body { max-width: 760px; margin: 0 auto; box-shadow: 0 0 50px rgba(0,0,0,.05); }
+  .topbar { max-width: 760px; margin: 0 auto; }
+  .tabbar { max-width: 760px; left: 50%; transform: translateX(-50%); }
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 桌面：左侧固定导航栏 + 内容区自适应（真正的双栏布局） */
+@media (min-width: 980px) {
+  :root { --side: 236px; }
+
+  /* 取消平板居中的手机框，回到全宽 */
+  body {
+    max-width: none; margin: 0; padding-bottom: 40px;
+    box-shadow: none; background: #eef1ef; font-size: 17px; line-height: 1.7;
+  }
+
+  /* 顶栏变为内容区表头：白底、用 margin 让出侧栏宽度（sticky 的 left/right 不能真正偏移，必须用 margin） */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    margin-left: max(var(--side), calc((100vw - 1100px) / 2));
+    margin-right: auto;
+    max-width: 1000px;
+    background: #fff; color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  }
+  .topbar .tb-title { color: var(--ink); }
+  .topbar .tb-back { color: var(--ink); }
+  .topbar .tb-back:active { background: #f0f3f1; }
+  .topbar .tb-act { background: var(--green); color: #fff; }
+  .topbar .tb-act:active { background: #0a6a4d; }
+
+  /* 底部导航 → 左侧固定深色侧栏 */
+  .tabbar {
+    flex-direction: column; align-items: stretch; justify-content: flex-start;
+    height: 100vh; width: var(--side); left: 0; right: auto;
+    bottom: 0; top: 0; padding: 26px 0 0; transform: none; gap: 4px;
+    background: var(--ink); border-top: none; border-right: 1px solid rgba(255,255,255,.08);
+  }
+  .tabbar a {
+    flex-direction: row; justify-content: flex-start; gap: 14px;
+    height: 48px; font-size: 15px; color: #b9c7c1; border-radius: 0;
+  }
+  .tabbar a.on { color: #fff; background: rgba(255,255,255,.08); box-shadow: inset 3px 0 0 var(--green-3); }
+  .tabbar .ti { font-size: 20px; }
+
+  /* 侧栏品牌区（仅桌面显示） */
+  .sb-brand {
+    display: flex; align-items: center; gap: 12px;
+    padding: 0 22px 22px; margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.08); cursor: pointer;
+  }
+  .sb-logo {
+    width: 42px; height: 42px; flex: none; border-radius: 11px;
+    background: var(--green); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px;
+  }
+  .sb-txt { display: flex; flex-direction: column; line-height: 1.25; }
+  .sb-name { color: #fff; font-size: 17px; font-weight: 700; }
+  .sb-sub { color: #7e8f88; font-size: 12px; margin-top: 2px; }
+
+  /* 内容区：让出侧栏，并在剩余空间内与顶栏对齐居中、限制阅读宽度 */
+  .wrap {
+    margin-left: max(var(--side), calc((100vw - 1100px) / 2));
+    margin-right: auto;
+    max-width: 1000px;
+    padding: 26px 30px 40px;
+  }
+
+  /* 网格在桌面变 3~4 列 */
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+
+  /* 详情页：正文收窄为舒适阅读栏 */
+  .detail { max-width: 760px; margin-left: auto; margin-right: auto; }
+  .d-title { font-size: 24px; }
+  .d-sec p { font-size: 17px; }
+  .item-title, .res-title, .ch-name { font-size: 16.5px; }
 }
 
 /* 尊重系统减少动画设置 */
