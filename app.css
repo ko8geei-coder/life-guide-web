@@ -303,12 +303,12 @@ mark { background: #fff3c4; color: inherit; padding: 0 1px; border-radius: 2px; 
     box-shadow: none; background: #eef1ef; font-size: 17px; line-height: 1.7;
   }
 
-  /* 顶栏变为内容区表头：白底、用 margin 让出侧栏宽度（sticky 的 left/right 不能真正偏移，必须用 margin） */
+  /* 内容列统一宽度：顶栏与内容区用同一公式，左缘对齐、整体居中 */
   .topbar {
     position: sticky; top: 0; z-index: 30;
-    margin-left: max(var(--side), calc((100vw - 1100px) / 2));
+    margin-left: max(var(--side), calc((100vw - 980px) / 2));
     margin-right: auto;
-    max-width: 1000px;
+    max-width: 880px;
     background: #fff; color: var(--ink);
     border-bottom: 1px solid var(--line);
     box-shadow: 0 1px 0 rgba(0,0,0,.02);
@@ -347,20 +347,27 @@ mark { background: #fff3c4; color: inherit; padding: 0 1px; border-radius: 2px; 
   .sb-name { color: #fff; font-size: 17px; font-weight: 700; }
   .sb-sub { color: #7e8f88; font-size: 12px; margin-top: 2px; }
 
-  /* 内容区：让出侧栏，并在剩余空间内与顶栏对齐居中、限制阅读宽度 */
+  /* 内容区：与顶栏同宽同位，阅读密度合适、不空旷 */
   .wrap {
-    margin-left: max(var(--side), calc((100vw - 1100px) / 2));
+    margin-left: max(var(--side), calc((100vw - 980px) / 2));
     margin-right: auto;
-    max-width: 1000px;
-    padding: 26px 30px 40px;
+    max-width: 880px;
+    padding: 28px 32px 44px;
   }
 
-  /* 网格在桌面变 3~4 列 */
+  /* 网格密度：主题 6 张 → 3 列正好两行；场景 8 张 → 4 列正好两行 */
   .grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
-  @media (min-width: 1280px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  /* hero 统计：靠左聚拢，不再平分整行拉散 */
+  .hero-stats { justify-content: flex-start; gap: 64px; }
+  .hero-stats div { flex: none; text-align: left; }
+
+  /* 搜索框收窄，不再横跨整行 */
+  .searchbar { max-width: 520px; }
 
   /* 详情页：正文收窄为舒适阅读栏 */
-  .detail { max-width: 760px; margin-left: auto; margin-right: auto; }
+  .detail { max-width: 720px; margin-left: auto; margin-right: auto; }
   .d-title { font-size: 24px; }
   .d-sec p { font-size: 17px; }
   .item-title, .res-title, .ch-name { font-size: 16.5px; }

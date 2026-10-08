@@ -194,9 +194,9 @@
     });
     h += '</div>';
 
-    // 8 个场景
+    // 8 个场景（grid-4：桌面 4 列正好两行；手机仍 2 列）
     h += '<div class="sec-t" style="margin-top:20px">按场景查找</div>' +
-      '<div class="sec-tip">当下正遇到什么事？从这里进更直接。</div><div class="grid">';
+      '<div class="sec-tip">当下正遇到什么事？从这里进更直接。</div><div class="grid grid-4">';
     IDX.scenarios.forEach(function (s) {
       var n = s.chapters.reduce(function (a, ci) { return a + IDX.chapters[ci].count; }, 0);
       h += '<button class="g-card" onclick="location.href=\'#/g/' + s.id + '\'">' +
